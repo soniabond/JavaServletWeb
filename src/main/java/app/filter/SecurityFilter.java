@@ -23,38 +23,35 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebFilter("/*")
 public class SecurityFilter implements Filter {
-
-    public SecurityFilter() {
-    }
+    private FilterConfig config = null;
+    private boolean active = false;
 
     @Override
     public void destroy() {
+        config = null;
     }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) req;
-        HttpServletResponse response = (HttpServletResponse) resp;
+        System.out.println("HELLO WORLD");
 
-        String servletPath = request.getServletPath();
+            HttpServletRequest request = (HttpServletRequest) req;
+            HttpServletResponse response = (HttpServletResponse) resp;
 
-        UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
+            String servletPath = request.getServletPath();
 
-        if (servletPath.equals("/login")) {
-            chain.doFilter(request, response);
-            return;
-        }
-        HttpServletRequest wrapRequest = request;
+            UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
 
-        if (loginedUser != null) {
-            String userName = loginedUser.getUserName();
-            List<String> roles = loginedUser.getRoles();
-            wrapRequest = new UserRoleRequestWrapper(userName, roles, request);
-        }
+            HttpServletRequest wrapRequest = request;
 
-        // Страницы требующие входа в систему.
-        if (SecurityUtils.isSecurityPage(request)) {
+            if (loginedUser != null) {
+                String userName = loginedUser.getUserName();
+                List<String> roles = loginedUser.getRoles();
+                wrapRequest = new UserRoleRequestWrapper(userName, roles, request);
+            }
+        if(active) {
+            // Страницы требующие входа в систему.
 
             // Если пользователь еще не вошел в систему,
             // Redirect (перенаправить) к странице логина.
@@ -78,14 +75,24 @@ public class SecurityFilter implements Filter {
 
                 dispatcher.forward(request, response);
                 return;
-            }
-        }
 
-        chain.doFilter(wrapRequest, response);
+            }
+            chain.doFilter(wrapRequest, response);
+
+        }
+       else {
+           chain.doFilter(req, resp);
+        }
     }
 
     @Override
-    public void init(FilterConfig fConfig) throws ServletException {
+    public void init(FilterConfig config) throws ServletException {
+        System.out.println("JAJAJAJAJJA");
+
+        this.config = config;
+        String act = config.getInitParameter("active");
+        if (act != null)
+            active = (act.toUpperCase().equals("TRUE"));
 
     }
 
