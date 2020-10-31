@@ -65,7 +65,7 @@ import javax.servlet.http.HttpServletResponse;
             if (requestUri != null) {
                 response.sendRedirect(requestUri);
             } else {
-                response.sendRedirect(request.getContextPath() + "/userInfo");
+                response.sendRedirect(request.getContextPath() + "/myInfo");
             }
 
         }

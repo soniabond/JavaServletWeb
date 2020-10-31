@@ -11,6 +11,8 @@
     <title>User Info</title>
 </head>
 <body>
+<div class="my-container">
+    <div class="main-body">
 <jsp:include page="_menu.jsp"></jsp:include>
 
 <h3>Hello: ${loginedUser.userName}</h3>
@@ -19,6 +21,7 @@ User Name: <b>${loginedUser.userName}</b>
 <br />
 Gender: ${loginedUser.gender } <br />
 
-
+    </div>
+</div>
 </body>
 </html>

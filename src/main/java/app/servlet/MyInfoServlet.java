@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet({ "/", "/index" })
-public class HomeServlet extends HttpServlet {
+@WebServlet("/myInfo")
+public class MyInfoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public HomeServlet() {
+    public MyInfoServlet() {
         super();
     }
 
@@ -23,7 +23,7 @@ public class HomeServlet extends HttpServlet {
 
 
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/homeView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/myInfoView.jsp");
 
         dispatcher.forward(request, response);
     }

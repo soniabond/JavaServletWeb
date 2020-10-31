@@ -1,19 +1,18 @@
 package app.servlet;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-@WebServlet({ "/", "/index" })
-public class HomeServlet extends HttpServlet {
+@WebServlet("/publicUserInfo")
+public class PublicUserInfoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public HomeServlet() {
+    public PublicUserInfoServlet() {
         super();
     }
 
@@ -22,8 +21,9 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
 
 
+
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/homeView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/mentorInfoView.jsp");
 
         dispatcher.forward(request, response);
     }

@@ -1,20 +1,19 @@
 <%--
   Created by IntelliJ IDEA.
-  User: sophi
-  Date: 11.10.2020
-  Time: 19:53
+  User: sofiia
+  Date: 29.10.20
+  Time: 10:28
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>HomePage</title>
+    <title>Title</title>
 </head>
 <body>
 <div class="my-container">
     <div class="main-body">
-<jsp:include page="_menu.jsp"></jsp:include>
-        <h3>Home Page</h3>
+Страница регистрации
     </div>
 </div>
 </body>

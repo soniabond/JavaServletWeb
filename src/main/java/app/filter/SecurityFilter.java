@@ -34,12 +34,10 @@ public class SecurityFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
-        System.out.println("HELLO WORLD");
 
+        if(active) {
             HttpServletRequest request = (HttpServletRequest) req;
             HttpServletResponse response = (HttpServletResponse) resp;
-
-            String servletPath = request.getServletPath();
 
             UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
 
@@ -47,10 +45,9 @@ public class SecurityFilter implements Filter {
 
             if (loginedUser != null) {
                 String userName = loginedUser.getUserName();
-                List<String> roles = loginedUser.getRoles();
-                wrapRequest = new UserRoleRequestWrapper(userName, roles, request);
+                String role = loginedUser.getRole();
+                wrapRequest = new UserRoleRequestWrapper(userName, role, request);
             }
-        if(active) {
             // Страницы требующие входа в систему.
 
             // Если пользователь еще не вошел в систему,
@@ -87,7 +84,6 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        System.out.println("JAJAJAJAJJA");
 
         this.config = config;
         String act = config.getInitParameter("active");

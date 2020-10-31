@@ -9,27 +9,37 @@ public class UserAccount implements Serializable {
     public static final String GENDER_MALE = "M";
     public static final String GENDER_FEMALE = "F";
 
+    private long id;
+
     private String userName;
     private String gender;
     private String password;
 
-    private List<String> roles;
+
+    private String role;
 
     public UserAccount() {
 
     }
 
-    public UserAccount(String userName, String password, String gender, String... roles) {
+    public UserAccount(long id, String userName, String password, String gender, String role) {
+
+        this.id = id;
         this.userName = userName;
         this.password = password;
         this.gender = gender;
 
-        this.roles = new ArrayList<String>();
-        if (roles != null) {
-            for (String r : roles) {
-                this.roles.add(r);
-            }
-        }
+
+        this.role = role;
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -56,12 +66,12 @@ public class UserAccount implements Serializable {
         this.password = password;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role= role;
     }
 
     @Override
@@ -70,7 +80,7 @@ public class UserAccount implements Serializable {
                 "userName='" + userName + '\'' +
                 ", gender='" + gender + '\'' +
                 ", password='" + password + '\'' +
-                ", roles=" + roles +
+                ", role=" + role +
                 '}';
     }
 

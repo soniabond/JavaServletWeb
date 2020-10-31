@@ -20,20 +20,18 @@ public class SecurityConfig {
     private static void init() {
 
 
-        List<String> urlPatterns1 = new ArrayList<>();
+        List<String> urlPatternsMentor = new ArrayList<>();
 
-        urlPatterns1.add("/userInfo");
-        urlPatterns1.add("/employeeTask");
+        urlPatternsMentor.add("/myInfo");
 
-        mapConfig.put(ROLE_MENTOR, urlPatterns1);
+        mapConfig.put(ROLE_MENTOR, urlPatternsMentor);
 
 
-        List<String> urlPatterns2 = new ArrayList<>();
+        List<String> urlPatternsTrainee = new ArrayList<>();
 
-        urlPatterns2.add("/userInfo");
-        urlPatterns2.add("/managerTask");
+        urlPatternsMentor.add("/myInfo");
 
-        mapConfig.put(ROLE_TRAINEE, urlPatterns2);
+        mapConfig.put(ROLE_TRAINEE, urlPatternsMentor);
     }
 
     public static Set<String> getAllAppRoles() {

@@ -10,22 +10,22 @@ import javax.servlet.http.HttpServletRequestWrapper;
 public class UserRoleRequestWrapper extends HttpServletRequestWrapper {
 
     private String user;
-    private List<String> roles = null;
+    private String role = null;
     private HttpServletRequest realRequest;
 
-    public UserRoleRequestWrapper(String user, List<String> roles, HttpServletRequest request) {
+    public UserRoleRequestWrapper(String user, String role, HttpServletRequest request) {
         super(request);
         this.user = user;
-        this.roles = roles;
+        this.role = role;
         this.realRequest = request;
     }
 
     @Override
     public boolean isUserInRole(String role) {
-        if (roles == null) {
+        if (role == null) {
             return this.realRequest.isUserInRole(role);
         }
-        return roles.contains(role);
+        return role.contains(role);
     }
 
     @Override
