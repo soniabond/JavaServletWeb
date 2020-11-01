@@ -22,6 +22,8 @@
             <div id="formContent">
                 <!-- Login Form -->
                 <form method="POST" action="${pageContext.request.contextPath}/login">
+                    <h2>Login</h2>
+                    <br>
                     <input type="hidden" name="redirectId"  value="${param.redirectId}">
                     <input type="text" name="userName"  value="${userName}" placeholder="username">
                     <input type="password" name="password" value= "${password}" placeholder="password">

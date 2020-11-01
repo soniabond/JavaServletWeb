@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class="my-container">
+    <jsp:include page="_menu.jsp"></jsp:include>
     <div class="main-body">
-<jsp:include page="_menu.jsp"></jsp:include>
         <h3>Home Page</h3>
     </div>
 </div>
