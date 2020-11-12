@@ -1,5 +1,5 @@
 package app.servlet;
-import app.bean.UserAccount;
+import app.entity.User;
 import app.utils.DataDAO;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class MentorSearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<UserAccount>mentors = DataDAO.findAllMentors();
+        List<User>mentors = DataDAO.findAllMentors();
         request.setAttribute("mentors", mentors);
 
         RequestDispatcher dispatcher

@@ -1,28 +1,33 @@
-package app.bean;
+package app.entity;
 
+import org.hibernate.annotations.NaturalId;
+
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public class UserAccount implements Serializable {
+@Table(name = "users")
+public class User implements Serializable {
     public static final String GENDER_MALE = "M";
     public static final String GENDER_FEMALE = "F";
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
+    @NaturalId
     private String userName;
-    private String gender;
+
+    @Column(nullable = false)
     private String password;
 
-
+    @Column(nullable = false)
     private String role;
 
-    public UserAccount() {
+    private String gender;
 
-    }
 
-    public UserAccount(long id, String userName, String password, String gender, String role) {
+    public User(long id, String userName, String password, String gender, String role) {
 
         this.id = id;
         this.userName = userName;
@@ -88,7 +93,7 @@ public class UserAccount implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserAccount that = (UserAccount) o;
+        User that = (User) o;
         return userName.equals(that.userName) &&
                 password.equals(that.password);
     }

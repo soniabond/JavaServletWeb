@@ -1,5 +1,9 @@
 package app.servlet;
 
+import app.entity.User;
+import app.utils.HibernateUtil;
+import org.hibernate.Session;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -20,6 +24,9 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
 
 
         RequestDispatcher dispatcher //

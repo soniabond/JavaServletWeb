@@ -1,12 +1,11 @@
 package app.filter;
 
-import app.bean.UserAccount;
+import app.entity.User;
 import app.request.UserRoleRequestWrapper;
 import app.utils.AppUtils;
 import app.utils.SecurityUtils;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -39,7 +38,7 @@ public class SecurityFilter implements Filter {
             HttpServletRequest request = (HttpServletRequest) req;
             HttpServletResponse response = (HttpServletResponse) resp;
 
-            UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
+            User loginedUser = AppUtils.getLoginedUser(request.getSession());
 
             HttpServletRequest wrapRequest = request;
 

@@ -2,7 +2,7 @@ package app.servlet;
 
 
 
-import app.bean.UserAccount;
+import app.entity.User;
 import app.utils.AppUtils;
 import app.utils.DataDAO;
 
@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServletResponse;
 
             String userName = request.getParameter("userName");
             String password = request.getParameter("password");
-            UserAccount userAccount = DataDAO.findUser(userName, password);
+            User userAccount = DataDAO.findUser(userName, password);
 
             if (userAccount == null) {
                 String errorMessage = "Invalid username or password";

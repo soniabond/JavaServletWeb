@@ -1,6 +1,6 @@
 package app.utils;
 
-import app.bean.UserAccount;
+import app.entity.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,13 +15,13 @@ public class AppUtils {
     private static final Map<String, Integer> uri_id_map = new HashMap<>();
 
 
-    public static void storeLoginedUser(HttpSession session, UserAccount loginedUser) {
+    public static void storeLoginedUser(HttpSession session, User loginedUser) {
         session.setAttribute("loginedUser", loginedUser);
     }
 
     // Получить информацию пользователя, сохраненную в Session.
-    public static UserAccount getLoginedUser(HttpSession session) {
-        UserAccount loginedUser = (UserAccount) session.getAttribute("loginedUser");
+    public static User getLoginedUser(HttpSession session) {
+        User loginedUser = (User) session.getAttribute("loginedUser");
         return loginedUser;
     }
 
