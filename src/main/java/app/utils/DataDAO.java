@@ -22,19 +22,6 @@ public class DataDAO {
     private static void initUsers() {
 
 
-        User emp = new User(1, "trainee1", "123", User.GENDER_MALE,
-                SecurityConfig.ROLE_TRAINEE);
-
-        User mng = new User(2, "mentor1", "123", User.GENDER_MALE,
-                SecurityConfig.ROLE_MENTOR);
-
-        User emp1 = new User(3, "mentor2", "123", User.GENDER_MALE,
-                SecurityConfig.ROLE_MENTOR);
-
-
-        mapUsers.put(emp.getUserName(), emp);
-        mapUsers.put(mng.getUserName(), mng);
-        mapUsers.put(emp1.getUserName(), emp1);
     }
 
     // Find a User by userName and password.
@@ -46,6 +33,7 @@ public class DataDAO {
         return null;
     }
 
+
     // find user public info by username
     public static SimpleUserInfo findSimpleUserInfo(String username){
         SimpleUserInfo userInfo = new SimpleUserInfo();
@@ -53,8 +41,8 @@ public class DataDAO {
         if (u == null)
             return null;
         userInfo.setId(u.getId());
-        userInfo.setUserName(u.getUserName());
-        userInfo.setUserRole(u.getRole());
+//        userInfo.setUserName(u.getUserName());
+//        userInfo.setUserRole(u.getRole());
         return userInfo;
     }
 
@@ -64,7 +52,7 @@ public class DataDAO {
         for(Map.Entry<String, User> mentor: mapUsers.entrySet()) {
             if (mentor.getValue().getId() == id) {
                 userInfo.setId(id);
-                userInfo.setUserName(mentor.getValue().getUserName());
+//                userInfo.setUserName(mentor.getValue().getUserName());
                 return userInfo;
             }
         }
@@ -76,10 +64,10 @@ public class DataDAO {
 
     public static List<User> findAllMentors(){
         List<User> userAccounts = new ArrayList<>();
-        for(Map.Entry<String, User> mentor: mapUsers.entrySet()){
-            if(mentor.getValue().getRole().equals(SecurityConfig.ROLE_MENTOR))
-                    userAccounts.add(mentor.getValue());
-        }
+//        for(Map.Entry<String, User> mentor: mapUsers.entrySet()){
+//            if(mentor.getValue().getRole().equals(SecurityConfig.ROLE_MENTOR))
+//                    userAccounts.add(mentor.getValue());
+//        }
         return userAccounts;
     }
 
