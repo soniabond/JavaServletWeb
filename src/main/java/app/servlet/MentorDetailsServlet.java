@@ -1,11 +1,10 @@
 package app.servlet;
 
-import app.bean.SimpleUserInfo;
-import app.utils.DataDAO;
+import app.repository.UserRepository;
+import app.entity.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,13 +15,14 @@ public class MentorDetailsServlet extends HttpServlet {
     public MentorDetailsServlet() {
         super();
     }
+    private static UserRepository userRepository = new UserRepository();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String [] splitedURI = request.getRequestURI().split("/");
-        long id = Long.parseLong(splitedURI[splitedURI.length-1]);
-        SimpleUserInfo userInfo = DataDAO.findUserById(id);
+        int id = Integer.parseInt(splitedURI[splitedURI.length-1]);
+        User userInfo = userRepository.findUserById(id);
         request.setAttribute("userInfo", userInfo);
 
         RequestDispatcher dispatcher

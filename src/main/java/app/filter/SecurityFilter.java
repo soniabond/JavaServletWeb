@@ -43,9 +43,9 @@ public class SecurityFilter implements Filter {
             HttpServletRequest wrapRequest = request;
 
             if (loginedUser != null) {
-                String userName = loginedUser.getUserName();
-                String role = loginedUser.getRole();
-                wrapRequest = new UserRoleRequestWrapper(userName, role, request);
+//                String userName = loginedUser.getUserName();
+//                String role = loginedUser.getRole();
+//                wrapRequest = new UserRoleRequestWrapper(userName, role, request);
             }
             // Страницы требующие входа в систему.
 

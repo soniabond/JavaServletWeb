@@ -2,9 +2,9 @@ package app.servlet;
 
 
 
+import app.repository.UserRepository;
 import app.entity.User;
 import app.utils.AppUtils;
-import app.utils.DataDAO;
 
 import java.io.IOException;
 
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
     @WebServlet("/login")
     public class LoginServlet extends HttpServlet {
         private static final long serialVersionUID = 1L;
+        public static UserRepository userRepository = new UserRepository();
 
         public LoginServlet() {
             super();
@@ -39,7 +40,7 @@ import javax.servlet.http.HttpServletResponse;
 
             String userName = request.getParameter("userName");
             String password = request.getParameter("password");
-            User userAccount = DataDAO.findUser(userName, password);
+            User userAccount = userRepository.findUserById(1);
 
             if (userAccount == null) {
                 String errorMessage = "Invalid username or password";

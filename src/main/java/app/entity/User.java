@@ -17,7 +17,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @Column(nullable = false, unique = true)
     @NaturalId(mutable = true)
@@ -47,7 +47,7 @@ public class User implements Serializable {
     private Map<KnownAuthority, UserAuthority> authorities = new EnumMap<>(KnownAuthority.class);
 
 
-    public User(long id, String mail, String firstName, String lastName, String phoneNumber, GenderEnum gender, Map<KnownAuthority, UserAuthority> authorities) {
+    public User(int id, String mail, String firstName, String lastName, String phoneNumber, GenderEnum gender, Map<KnownAuthority, UserAuthority> authorities) {
         this.id = id;
         this.mail = mail;
         this.firstName = firstName;
@@ -59,11 +59,11 @@ public class User implements Serializable {
 
     public User(){}
 
-    public long getId() {
+    public  int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
