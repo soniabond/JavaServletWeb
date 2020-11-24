@@ -6,7 +6,12 @@
     <display-name>SecurityWebApp</display-name>
     <context-param>
         <param-name>javax.faces.CONFIG_FILES</param-name>
-        <param-value>/hibernate.cfg.xml</param-value>
+        <param-value>hibernate.cfg.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>path_to_image</param-name>
+        <param-value>/images</param-value>
     </context-param>
 
 

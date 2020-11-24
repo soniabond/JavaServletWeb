@@ -1,0 +1,61 @@
+.header-container {
+    display: flex;
+    position: absolute;
+    width: 1200px;
+    height: 38px;
+    left: 120px;
+    top: 34px;
+}
+
+.logo {
+    margin-left: 5%;
+}
+.logo img {
+    display: block;
+}
+nav {
+    margin: 1.5em 0 0 5%;
+}
+header ul li {
+    display: inline-block;
+    padding: 0 1.4em 0 0;
+    font-size: 0.9em;
+}
+header ul li {
+    position: absolute;
+    left: 34.51%;
+    right: 60.14%;
+    top: 5%;
+    bottom: 93.11%;
+
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+
+    color: #B1B7C5;
+}
+header ul li a {
+    text-decoration: none;
+    color: #7D7C7D;
+}
+
+.sgn-btn{
+    position: absolute;
+    width: 90px;
+    height: 38px;
+    left: 1230px;
+    top: 34px;
+
+    background: radial-gradient(112.5% 492.19% at 81.88% 100%, #0066FF 0%, #0085FF 100%);
+    box-shadow: 0px 10px 24px 3px rgba(0, 102, 255, 0.4);
+    border-radius: 12px;
+}
+
+

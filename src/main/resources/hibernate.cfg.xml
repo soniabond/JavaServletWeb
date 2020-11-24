@@ -17,6 +17,10 @@
         <property name="hibernate.format_sql">true</property>
         <mapping class="app.entity.User"/>
         <mapping class="app.entity.UserAuthority"/>
+        <mapping class="app.entity.ProgrammingLangs"/>
+        <mapping class="app.entity.Mentor"/>
+        <mapping class="app.entity.Trainee"/>
+
 
     </session-factory>
 

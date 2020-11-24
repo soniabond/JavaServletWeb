@@ -6,14 +6,14 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+
 
 @Entity
 @Table(name = "users")
-@SuppressWarnings("FieldMayBeFinal")
-public class User implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "BD_TYPE")
+public abstract class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,31 @@ public class User implements Serializable {
     @NaturalId(mutable = true)
     private String mail;
 
+    public User(int id, String mail, String password,
+                String firstName, String lastName, String phoneNumber,
+                Map<KnownAuthority, UserAuthority> authorities,
+                Set<ProgrammingLangs> programmingLangs) {
+        this.id = id;
+        this.mail = mail;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.authorities = authorities;
+        this.programmingLangs = programmingLangs;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Column(nullable = false, name = "password")
+    private String password;
+
     @Column(nullable = false, name = "first_name")
     private String firstName;
 
@@ -30,12 +55,20 @@ public class User implements Serializable {
     @Column(nullable = false, name = "last_name")
     private String lastName;
 
-    @Column(nullable = false, unique = true, name="phone_number")
+    @Column(name="phone_number")
     private String phoneNumber;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private GenderEnum gender;
+
+
+    public Set<ProgrammingLangs> getProgrammingLangs() {
+        return programmingLangs;
+    }
+
+    public void setProgrammingLangs(Set<ProgrammingLangs> programmingLangs) {
+        this.programmingLangs = programmingLangs;
+    }
+
+
 
     @ManyToMany
     @JoinTable(name = "user_authorities",
@@ -46,16 +79,12 @@ public class User implements Serializable {
     @MapKey(name = "value")
     private Map<KnownAuthority, UserAuthority> authorities = new EnumMap<>(KnownAuthority.class);
 
-
-    public User(int id, String mail, String firstName, String lastName, String phoneNumber, GenderEnum gender, Map<KnownAuthority, UserAuthority> authorities) {
-        this.id = id;
-        this.mail = mail;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.gender = gender;
-        this.authorities = authorities;
-    }
+    @ManyToMany
+    @JoinTable(name = "user_languages",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id", referencedColumnName = "id")
+    )
+    private Set<ProgrammingLangs> programmingLangs = new HashSet<>();
 
     public User(){}
 
@@ -99,13 +128,6 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public GenderEnum getGender() {
-        return gender;
-    }
-
-    public void setGender(GenderEnum gender) {
-        this.gender = gender;
-    }
 
     public Map<KnownAuthority, UserAuthority> getAuthorities() {
         return authorities;
@@ -137,7 +159,8 @@ public class User implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", gender=" + gender +
+                ", programmingLangs=" + programmingLangs +
+                ", authorities=" + authorities +
                 '}';
     }
 }

@@ -1,44 +1,46 @@
 package app.repository;
 
 import app.entity.User;
+import app.entity.UserAuthority;
+import app.entity.enums.KnownAuthority;
 import app.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-public class UserRepository{
-    public void saveUser (User user){
+public class UserAuthorityRepository {
+    public void saveUserAuthority (UserAuthority userAuthority){
         Session session= HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(user);
+        session.save(userAuthority);
         session.getTransaction().commit();
         session.close();
     }
 
-    public User findUserById(int id){
+    public UserAuthority findUserAuthorityById(int id){
         Session session=HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query= session.createQuery("from User where id=:id");
+        Query query= session.createQuery("from UserAuthority where id=:id");
         query.setParameter("id", id);
-        User user= (User) query.uniqueResult();
+        UserAuthority userAuthority= (UserAuthority) query.uniqueResult();
         session.getTransaction().commit();
         session.close();
-        return user;
+        return userAuthority;
     }
 
-    public User findUserByEmail(String mail){
+    public UserAuthority findUserAuthorityByAuthority(KnownAuthority knownAuthority){
         Session session=HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query= session.createQuery("from User where mail=:mail");
-        query.setParameter("mail", mail);
-        User user= (User) query.uniqueResult();
+        Query query= session.createQuery("from UserAuthority where value=:knownAuthority");
+        query.setParameter("knownAuthority", knownAuthority);
+        UserAuthority userAuthority= (UserAuthority) query.uniqueResult();
         session.getTransaction().commit();
         session.close();
-        return user;
+        return userAuthority;
     }
-    public void update(User user){
+    public void update(UserAuthority userAuthority){
         Session session=HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.update(user);
+        session.update(userAuthority);
         session.getTransaction().commit();
         session.close();
     }
@@ -46,9 +48,9 @@ public class UserRepository{
     public void deleteUserById(int id){
         Session session=HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Query query= session.createQuery("from User where id=:id");
+        Query query= session.createQuery("from UserAuthority where id=:id");
         query.setParameter("id", id);
-        User user= (User) query.uniqueResult();
+        UserAuthority user= (UserAuthority) query.uniqueResult();
         session.delete(user);
         session.getTransaction().commit();
         session.close();
