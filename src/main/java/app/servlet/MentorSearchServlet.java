@@ -31,7 +31,7 @@ public class MentorSearchServlet extends HttpServlet {
         request.setAttribute("mentors", mentors);
 
         RequestDispatcher dispatcher
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/mentorSearchView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/newMentorSearchView.jsp");
 
 
         dispatcher.forward(request, response);

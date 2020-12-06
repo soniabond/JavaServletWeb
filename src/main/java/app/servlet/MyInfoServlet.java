@@ -23,7 +23,7 @@ public class MyInfoServlet extends HttpServlet {
 
 
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/myInfoView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/newMyInfoView.jsp");
 
         dispatcher.forward(request, response);
     }
