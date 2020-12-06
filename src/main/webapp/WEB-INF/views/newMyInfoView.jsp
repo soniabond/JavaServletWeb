@@ -27,10 +27,8 @@
                 <div class="search-item">
                     <img src="registerTest/avatar.png">
                     <div id="info-page" class="info-box">
-                        <span id="name"><h3><b>Anna Matia</b></h3></span>
-                        <span id="user-description">i am veryyyy good programmer i am veryyyy good programmer
-                    i am veryyyy good programmer i am veryyyy good programmer
-                    i am veryyyy good programmer i am veryyyy good programmer
+                        <span id="name"><h3><b>${loginedUser.firstName} ${loginedUser.lastName}</b></h3></span>
+                        <span id="user-description">i am veryyyy good programmer i am veryyyy good programmer i am veryyyy good programmer i am veryyyy good programmer i am veryyyy good programmer i am veryyyy good programmer
                     </span>
                     </div>
                 </div>
@@ -38,9 +36,9 @@
                     <div id="apply-box" class="info-box">
                         <div class="price"> 420$ </div><br>
                         phone: <a href="#" id="phone">+380666830321</a><br>
-                        mail: <a href="#" id="mail">annaMatia@gmail.com</a>
+                        mail: <a href="#" id="mail">${loginedUser.mail}</a>
                         github <a href="#">view more</a><br>
-                        website <a href="#">view more</a>
+                        website <a href="#">http//:${loginedUser.firstName}.com</a>
                     </div>
                     <div id="info-page" class="info-box">
                         <span class="languageName"><h3><b>Java Script</b></h3></span>
@@ -66,7 +64,6 @@
                 </div>
                 <span id="add-new-item">
               </span>
-                <p><input type="submit"></p>
             </form>
         </div>
     </div>
