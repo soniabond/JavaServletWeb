@@ -23,19 +23,6 @@ public abstract class User implements Serializable {
     @NaturalId(mutable = true)
     private String mail;
 
-    public User(int id, String mail, String password,
-                String firstName, String lastName, String phoneNumber,
-                Map<KnownAuthority, UserAuthority> authorities,
-                Set<ProgrammingLangs> programmingLangs) {
-        this.id = id;
-        this.mail = mail;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.authorities = authorities;
-        this.programmingLangs = programmingLangs;
-    }
 
     public String getPassword() {
         return password;
@@ -44,6 +31,12 @@ public abstract class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Column
+    private String city;
+
+    @Column(name = "place_of_work")
+    private String placeOfWork;
 
     @Column(nullable = false, name = "password")
     private String password;
@@ -58,7 +51,18 @@ public abstract class User implements Serializable {
     @Column(name="phone_number")
     private String phoneNumber;
 
-
+    public User(int id, String mail, String city, String placeOfWork, String password, String firstName, String lastName, String phoneNumber, Map<KnownAuthority, UserAuthority> authorities, Set<ProgrammingLangs> programmingLangs) {
+        this.id = id;
+        this.mail = mail;
+        this.city = city;
+        this.placeOfWork = placeOfWork;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.authorities = authorities;
+        this.programmingLangs = programmingLangs;
+    }
 
     public Set<ProgrammingLangs> getProgrammingLangs() {
         return programmingLangs;
@@ -70,7 +74,7 @@ public abstract class User implements Serializable {
 
 
 
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "user_authorities",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id")

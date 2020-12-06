@@ -41,7 +41,9 @@
                         <div class="search-result-item-body">
                             <div class="row">
                                 <div class="col-sm-9">
-                                    <h4 class="search-result-item-heading"><a href="#">${el.getUserName()}</a></h4>
+                                    <h4 class="search-result-item-heading"><a href="${pageContext.request.contextPath}/mentorSearch/${el.getId()}">
+                                            ${el.getFirstName()} ${el.getLastName()}
+                                    </a></h4>
                                     <p class="info">Kharkiv, Ukraine</p>
                                     <p class="description">ready to teach you if you are really into programming</p>
                                 </div>

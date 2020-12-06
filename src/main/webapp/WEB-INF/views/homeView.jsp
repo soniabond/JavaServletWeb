@@ -9,7 +9,7 @@
 <!--%@ taglib prefix = "ex" uri = "../WEB-INF/custom.tld"%>-->
 <html>
 <head>
-    <title>HomePage</title>
+    <title>HomePage</title>z
 </head>
 <body>
 <div class="my-container">

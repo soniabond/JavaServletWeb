@@ -1,9 +1,12 @@
 package app.repository;
 
+import app.entity.Mentor;
 import app.entity.User;
 import app.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class UserRepository{
     public void saveUser (User user){
@@ -35,12 +38,11 @@ public class UserRepository{
         session.close();
         return user;
     }
-    public void update(User user){
+
+    public List<Mentor> findAllMentors(){
         Session session=HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.update(user);
-        session.getTransaction().commit();
-        session.close();
+        return session.createQuery("select m from Mentor m", Mentor.class).getResultList();
     }
 
     public void deleteUserById(int id){

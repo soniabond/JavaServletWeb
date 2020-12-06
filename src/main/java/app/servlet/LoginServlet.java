@@ -50,14 +50,16 @@ import javax.servlet.http.HttpServletResponse;
                 throws ServletException, IOException {
 
 
-            String mail = request.getParameter("userEmailIn");
+            String firstName = request.getParameter("firstName");
             User user = null;
-            if (mail != null) {
-                String password = request.getParameter("passwordIn");
+            String mail;
+            String password;
+            if (firstName == null) {
+                mail = request.getParameter("userEmailIn");
+                password = request.getParameter("passwordIn");
                 try{
                     user = userService.loginUser(mail, password);
                 }catch (AccountPresenceException e){
-                    e.printStackTrace();
                     request.setAttribute("errorMessage", e.getMessage());
                     RequestDispatcher dispatcher //
                             = this.getServletContext().getRequestDispatcher("/WEB-INF/views/newLoginView.jsp");
@@ -65,27 +67,11 @@ import javax.servlet.http.HttpServletResponse;
                     dispatcher.forward(request, response);
                     return;
                 }
-                AppUtils.storeLoginedUser(request.getSession(), user);
             }
             else {
                 mail = request.getParameter("userEmailUp");
-                String password = request.getParameter("passwordUp");
-                String firstName = request.getParameter("firstName");
+                password = request.getParameter("passwordUp");
                 String lastName = request.getParameter("lastName");
-
-
-                User userAccount = userRepository.findUserByEmail(mail);
-                if (userAccount != null) {
-                    String errorMessage = "Account with this email already exists";
-
-                    request.setAttribute("errorMessage", errorMessage);
-
-                    RequestDispatcher dispatcher //
-                            = this.getServletContext().getRequestDispatcher("/WEB-INF/views/newLoginView.jsp");
-                    dispatcher.forward(request, response);
-                }
-
-
                 KnownAuthority knownAuthority = null;
                 String role = request.getParameter("checkMentor");
                 if (role == null) {
@@ -93,37 +79,33 @@ import javax.servlet.http.HttpServletResponse;
                     if (role == null) {
                         String errorMessage = "You have to choose your role";
                         System.out.println(errorMessage);
-
                         request.setAttribute("errorMessage", errorMessage);
-
                         RequestDispatcher dispatcher
                                 = this.getServletContext().getRequestDispatcher("/WEB-INF/views/newLoginView.jsp");
                         dispatcher.forward(request, response);
 
                     } else {
                         knownAuthority = KnownAuthority.ROLE_TRAINEE;
-                        user = new Trainee();
                     }
                 } else {
                     knownAuthority = KnownAuthority.ROLE_MENTOR;
-                    user = new Mentor();
                 }
+                try{
+                    System.out.println(firstName);
+                    System.out.println(lastName);
+                    System.out.println(mail);
+                    System.out.println(password);
+                user = userService.registerUser(firstName, lastName, mail, password,knownAuthority );}
+                catch (AccountPresenceException e){
+                    request.setAttribute("errorMessage", e.getMessage());
+                    RequestDispatcher dispatcher
+                            = this.getServletContext().getRequestDispatcher("/WEB-INF/views/newLoginView.jsp");
 
-
-                user.setFirstName(firstName);
-                user.setLastName(lastName);
-                user.setMail(mail);
-                user.setPassword(password);
-                UserAuthority userAuthority = userAuthorityRepository.findUserAuthorityByAuthority(knownAuthority);
-                Map<KnownAuthority, UserAuthority> knownAuthorityUserAuthorityMap = new
-                        HashMap<>();
-                knownAuthorityUserAuthorityMap.put(knownAuthority, userAuthority);
-                user.setAuthorities(knownAuthorityUserAuthorityMap);
-                userRepository.saveUser(user);
-                AppUtils.storeLoginedUser(request.getSession(), user);
+                    dispatcher.forward(request, response);
+                    return;
+                }
             }
-
-
+            AppUtils.storeLoginedUser(request.getSession(), user);
 
 
             //

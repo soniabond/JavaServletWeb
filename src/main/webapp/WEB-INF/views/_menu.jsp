@@ -12,5 +12,3 @@
         <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
     </ol>
 </nav>
-
-

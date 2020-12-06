@@ -24,14 +24,8 @@ public class Mentor extends User {
 
     public Mentor(){}
 
-    public Mentor(int id, String mail,
-                  String password, String firstName,
-                  String lastName, String phoneNumber,
-                  Map<KnownAuthority,
-            UserAuthority> authorities, Set<ProgrammingLangs> programmingLangs,
-                  String cooperation, String cooperationPrice) {
-        super(id, mail, password, firstName, lastName,
-                phoneNumber, authorities, programmingLangs);
+    public Mentor(int id, String mail, String city, String placeOfWork, String password, String firstName, String lastName, String phoneNumber, Map<KnownAuthority, UserAuthority> authorities, Set<ProgrammingLangs> programmingLangs, String cooperation, String cooperationPrice) {
+        super(id, mail, city, placeOfWork, password, firstName, lastName, phoneNumber, authorities, programmingLangs);
         this.cooperation = cooperation;
         this.cooperationPrice = cooperationPrice;
     }

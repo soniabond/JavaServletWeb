@@ -1,5 +1,7 @@
 package app.servlet;
+import app.entity.Mentor;
 import app.entity.User;
+import app.service.UserService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/mentorSearch")
 public class MentorSearchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    UserService userService = new UserService();
     public MentorSearchServlet() {
         super();
     }
@@ -24,8 +27,7 @@ public class MentorSearchServlet extends HttpServlet {
             throws ServletException, IOException {
 
         //List<User>mentors = DataDAO.findAllMentors();
-        List<User>mentors = new
-                ArrayList<>();
+        List<Mentor>mentors = userService.getAllMentors();
         request.setAttribute("mentors", mentors);
 
         RequestDispatcher dispatcher

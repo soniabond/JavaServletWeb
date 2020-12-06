@@ -22,6 +22,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
+        .error-label{
+            color: #FF2741;
+        }
         a:hover,a:focus{
             outline: none;
             text-decoration: none;
@@ -227,6 +230,7 @@
                                 <div class="form-group forgot-pass">
                                     <button type="submit" class="btn btn-default">forgot password</button>
                                 </div>
+                                <label class="error-label">${errorMessage}</label>
                             </form>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="Section2">
@@ -267,6 +271,7 @@
                                 <div class="form-group">
                                     <button type="submit" value="Submit" class="btn btn-default">Sign up</button>
                                 </div>
+                                <label class="error-label">${errorMessage}</label>
                             </form>
                         </div>
                     </div>

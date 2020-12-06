@@ -1,11 +1,14 @@
 package app.filter;
 
 import app.entity.User;
+import app.entity.enums.KnownAuthority;
 import app.request.UserRoleRequestWrapper;
 import app.utils.AppUtils;
 import app.utils.SecurityUtils;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -43,9 +46,11 @@ public class SecurityFilter implements Filter {
             HttpServletRequest wrapRequest = request;
 
             if (loginedUser != null) {
-//                String userName = loginedUser.getUserName();
-//                String role = loginedUser.getRole();
-//                wrapRequest = new UserRoleRequestWrapper(userName, role, request);
+                String mail = loginedUser.getMail();
+                KnownAuthority knownAuthority = (KnownAuthority) loginedUser.getAuthorities().keySet().toArray()[0];
+                String role = knownAuthority.getAuthority();
+                System.out.println("role"+role);
+                wrapRequest = new UserRoleRequestWrapper(mail, role, request);
             }
             // Страницы требующие входа в систему.
 

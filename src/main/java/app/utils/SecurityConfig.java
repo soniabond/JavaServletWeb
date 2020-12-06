@@ -1,5 +1,7 @@
 package app.utils;
 
+import app.entity.enums.KnownAuthority;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,9 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class SecurityConfig {
-
-    public static final String ROLE_TRAINEE = "TRAINEE";
-    public static final String ROLE_MENTOR = "MENTOR";
 
     private static final Map<String, List<String>> mapConfig = new HashMap<>();
 
@@ -24,14 +23,14 @@ public class SecurityConfig {
 
         urlPatternsMentor.add("/myInfo");
 
-        mapConfig.put(ROLE_MENTOR, urlPatternsMentor);
+        mapConfig.put(KnownAuthority.ROLE_MENTOR.getAuthority(), urlPatternsMentor);
 
 
         List<String> urlPatternsTrainee = new ArrayList<>();
 
         urlPatternsMentor.add("/myInfo");
 
-        mapConfig.put(ROLE_TRAINEE, urlPatternsMentor);
+        mapConfig.put(KnownAuthority.ROLE_TRAINEE.getAuthority(), urlPatternsTrainee);
     }
 
     public static Set<String> getAllAppRoles() {
