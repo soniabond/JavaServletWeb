@@ -1,13 +1,9 @@
 package app.entity;
 
-import app.entity.enums.GenderEnum;
 import app.entity.enums.KnownAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,11 +20,21 @@ public class Mentor extends User {
 
     public Mentor(){}
 
-    public Mentor(int id, String mail, String city, String placeOfWork, String password, String firstName, String lastName, String phoneNumber, Map<KnownAuthority, UserAuthority> authorities, Set<ProgrammingLangs> programmingLangs, String cooperation, String cooperationPrice) {
-        super(id, mail, city, placeOfWork, password, firstName, lastName, phoneNumber, authorities, programmingLangs);
+    public Mentor(int id, String mail, String city, String placeOfWork, String password, String firstName, String lastName, String phoneNumber, Map<KnownAuthority, UserAuthority> authorities, String cooperation, String cooperationPrice, Set<UserLanguage> posts) {
+        super(id, mail, city, placeOfWork, password, firstName, lastName, phoneNumber, authorities);
         this.cooperation = cooperation;
         this.cooperationPrice = cooperationPrice;
+        this.langs = posts;
     }
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<UserLanguage> langs = new HashSet<>();
+
+
 
     public String getCooperation() {
         return cooperation;

@@ -213,7 +213,7 @@
                         <!-- Tab panes -->
                         <div class="tab-content tabs">
                             <div role="tabpanel" class="tab-pane fade in active" id="Section1">
-                                <form class="form-horizontal" method="POST" action="${pageContext.request.contextPath}/login">
+                                <form class="form-horizontal" method="POST">
                                     <input type="hidden" name="redirectId"  value="${param.redirectId}">
                                     <div class="form-group">
                                         <label>email</label>

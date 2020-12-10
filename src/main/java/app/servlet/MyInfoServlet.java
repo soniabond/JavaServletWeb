@@ -21,7 +21,6 @@ public class MyInfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         RequestDispatcher dispatcher //
                 = this.getServletContext().getRequestDispatcher("/WEB-INF/views/newMyInfoView.jsp");
 
@@ -31,6 +30,9 @@ public class MyInfoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String userDescription = request.getParameter("user-description");
+        System.out.println("\n\nuser description"+userDescription+"\n\n");
 
         doGet(request, response);
     }

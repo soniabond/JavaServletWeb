@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-md-9 col-md-pull-3">
                     <p class="search-results-count">${mentors.size()} results</p>
-                    <c:forEach var="el" items="${mentors}">
+                  <c:forEach var="el" items="${mentors}">
                     <section class="search-result-item">
                         <a class="image-link" href="${pageContext.request.contextPath}/mentorSearch/${el.getId()}"><img class="image" src="https://bootdey.com/img/Content/avatar/avatar7.png">
                         </a>

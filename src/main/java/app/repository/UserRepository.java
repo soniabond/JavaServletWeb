@@ -2,6 +2,7 @@ package app.repository;
 
 import app.entity.Mentor;
 import app.entity.User;
+import app.entity.UserAuthority;
 import app.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -38,6 +39,15 @@ public class UserRepository{
         session.close();
         return user;
     }
+
+    public void updateUser(User user){
+        Session session=HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(user);
+        session.getTransaction().commit();
+        session.close();
+    }
+
 
     public List<Mentor> findAllMentors(){
         Session session=HibernateUtil.getSessionFactory().openSession();

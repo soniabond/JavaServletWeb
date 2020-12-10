@@ -23,12 +23,12 @@
     </div>
     <div class="main-content-box">
         <div class="main-content">
-            <form id="change-form" method="POST">
+            <form id="change-form" method="POST" action="${pageContext.request.contextPath}/myInfo">
                 <div class="search-item">
-                    <img src="registerTest/avatar.png">
+                    <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png">
                     <div id="info-page" class="info-box">
                         <span id="name"><h3><b>${loginedUser.firstName} ${loginedUser.lastName}</b></h3></span>
-                        <span id="user-description">i am veryyyy good programmer i am veryyyy good programmer i am veryyyy good programmer i am veryyyy good programmer i am veryyyy good programmer i am veryyyy good programmer
+                        <span id="user-description">Java Web Developer with exp +7 years I provide the following types of consulting services: ==> learning the basics of programming in the language chosen by the client (Data Types / Conditional Operators / Cycles / Arrays / Functions / Data Structures). ==> study of object-oriented analysis / design / programming (OOA / OOD / OOP) approaches in the chosen language.
                     </span>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 package app.entity;
 
 import app.entity.enums.KnownAuthority;
-import app.entity.enums.GenderEnum;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -51,7 +50,7 @@ public abstract class User implements Serializable {
     @Column(name="phone_number")
     private String phoneNumber;
 
-    public User(int id, String mail, String city, String placeOfWork, String password, String firstName, String lastName, String phoneNumber, Map<KnownAuthority, UserAuthority> authorities, Set<ProgrammingLangs> programmingLangs) {
+    public User(int id, String mail, String city, String placeOfWork, String password, String firstName, String lastName, String phoneNumber, Map<KnownAuthority, UserAuthority> authorities) {
         this.id = id;
         this.mail = mail;
         this.city = city;
@@ -61,15 +60,6 @@ public abstract class User implements Serializable {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.authorities = authorities;
-        this.programmingLangs = programmingLangs;
-    }
-
-    public Set<ProgrammingLangs> getProgrammingLangs() {
-        return programmingLangs;
-    }
-
-    public void setProgrammingLangs(Set<ProgrammingLangs> programmingLangs) {
-        this.programmingLangs = programmingLangs;
     }
 
 
@@ -83,12 +73,13 @@ public abstract class User implements Serializable {
     @MapKey(name = "value")
     private Map<KnownAuthority, UserAuthority> authorities = new EnumMap<>(KnownAuthority.class);
 
-    @ManyToMany
-    @JoinTable(name = "user_languages",
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "user_messages",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "language_id", referencedColumnName = "id")
+            inverseJoinColumns = @JoinColumn(name = "message_id", referencedColumnName = "id")
     )
-    private Set<ProgrammingLangs> programmingLangs = new HashSet<>();
+    private List<Message> messages = new ArrayList<>();
+
 
     public User(){}
 
@@ -132,6 +123,29 @@ public abstract class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPlaceOfWork() {
+        return placeOfWork;
+    }
+
+    public void setPlaceOfWork(String placeOfWork) {
+        this.placeOfWork = placeOfWork;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public Map<KnownAuthority, UserAuthority> getAuthorities() {
         return authorities;
@@ -163,7 +177,6 @@ public abstract class User implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", programmingLangs=" + programmingLangs +
                 ", authorities=" + authorities +
                 '}';
     }

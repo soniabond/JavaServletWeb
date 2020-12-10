@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: sofiia
@@ -68,11 +69,12 @@
                 </form>
             </div>
             <div class="main-content">
-                results found:
+                results found: ${mentors.size()}
+                <c:forEach var="el" items="${mentors}">
                 <div class="search-item">
-                    <img src="registerTest/avatar.png">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png">
                     <div class="info-box">
-                        <b>Anna Matia</b><br>
+                        <b>${el.getFirstName()} ${el.getLastName()}</b><br>
                         i am veryyyy good programmer i am veryyyy good programmer
                         i am veryyyy good programmer i am veryyyy good programmer
                         i am veryyyy good programmer i am veryyyy good programmer
@@ -81,40 +83,10 @@
                     <div id="apply-box" class="info-box">
                         <div class="price"> 420$ </div>
                         <div class="dialog-button message-button">message</div>
-                        <a href="#">view more</a>
+                        <a href="${pageContext.request.contextPath}/mentorSearch/${el.getId()}">view more</a>
                     </div>
                 </div>
-                <div class="search-item">
-                    <img src="registerTest/avatar.png">
-                    <div class="info-box">
-                        <b>Anna Matia</b><br>
-                        i am veryyyy good programmer i am veryyyy good programmer
-                        i am veryyyy good programmer i am veryyyy good programmer
-                        i am veryyyy good programmer i am veryyyy good programmer
-
-                    </div>
-                    <div id="apply-box" class="info-box">
-                        <div class="price"> free </div>
-                        <div class="dialog-button message-button">message</div>
-                        <a href="#">view more</a>
-                    </div>
-                </div>
-                <div class="search-item">
-                    <img src="registerTest/avatar.png">
-                    <div class="info-box">
-                        <b>Anna Matia</b><br>
-                        i am veryyyy good programmer i am veryyyy good programmer
-                        i am veryyyy good programmer i am veryyyy good programmer
-                        i am veryyyy good programmer i am veryyyy good programmer
-
-                    </div>
-                    <div id="apply-box" class="info-box">
-                        <div class="price"> 50$ </div>
-                        <div class="dialog-button message-button">message</div>
-                        <a href="#">view more</a>
-
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
     </div>

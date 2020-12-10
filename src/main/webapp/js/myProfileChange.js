@@ -16,7 +16,13 @@ changeButton.onclick = function(){
     userName.innerHTML = "<textarea>"+userNameText+"</textarea><br>";
     var userDescription = document.getElementById("user-description");
     var userDescriptionText= userDescription.textContent;
-    userDescription.innerHTML = "<textarea rows=5 cols=80>"+userDescriptionText+"</textarea><br>";
+    var textAreaElement = document.createElement("textarea");
+    textAreaElement.rows = 5;
+    textAreaElement.cols = 80;
+    textAreaElement.name = "user-description";
+    textAreaElement.value = userDescriptionText;
+    userDescription.prepend(textAreaElement);
+
 
 
     var languageDivs = document.querySelectorAll(".languageName");

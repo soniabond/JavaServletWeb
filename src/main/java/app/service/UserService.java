@@ -1,9 +1,6 @@
 package app.service;
 
-import app.entity.Mentor;
-import app.entity.Trainee;
-import app.entity.User;
-import app.entity.UserAuthority;
+import app.entity.*;
 import app.entity.enums.KnownAuthority;
 import app.exeptions.AccountPresenceException;
 import app.repository.UserAuthorityRepository;
@@ -66,5 +63,9 @@ public class UserService {
     public List<Mentor> getAllMentors(){
         List<Mentor> mentors = userRepository.findAllMentors();
         return mentors;
+    }
+
+    public List<Message> getUserMessages(){
+        List<Message>messages = userRepository.
     }
 }

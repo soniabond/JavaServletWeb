@@ -26,7 +26,7 @@ public class MentorDetailsServlet extends HttpServlet {
         request.setAttribute("userInfo", userInfo);
 
         RequestDispatcher dispatcher
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/mentorInfoView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/newMentorInfoView.jsp");
 
 
         dispatcher.forward(request, response);
