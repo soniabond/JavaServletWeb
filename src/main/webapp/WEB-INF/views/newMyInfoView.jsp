@@ -19,12 +19,12 @@
 <body>
 <div class="main-body">
     <div class="my-container">
-        <jsp:include page="_menu.jsp"></jsp:include>
+        <jsp:include page="_menuSigned.jsp"></jsp:include>
     </div>
     <div class="main-content-box">
         <div class="main-content">
             <form id="change-form" method="POST" action="${pageContext.request.contextPath}/myInfo">
-                <div class="search-item">
+                <div class="search-item show">
                     <img src="https://www.bootdey.com/img/Content/avatar/avatar1.png">
                     <div id="info-page" class="info-box">
                         <span id="name"><h3><b>${loginedUser.firstName} ${loginedUser.lastName}</b></h3></span>
@@ -32,15 +32,16 @@
                     </span>
                     </div>
                 </div>
-                <div class="search-item">
+                <div class="search-item show">
                     <div id="apply-box" class="info-box">
-                        <div class="price"> 420$ </div><br>
-                        phone: <a href="#" id="phone">+380666830321</a><br>
-                        mail: <a href="#" id="mail">${loginedUser.mail}</a>
-                        github <a href="#">view more</a><br>
-                        website <a href="#">http//:${loginedUser.firstName}.com</a>
+                        <div class="price"> ${loginedUser.cooperationPrice} </div><br>
+                        phone: <a id="phone">${loginedUser.phoneNumber}</a><br>
+                        mail: <a id="mail">${loginedUser.mail}</a>
+                        github <a >view more</a><br>
+                        website <a >http//:${loginedUser.firstName}.com</a>
                     </div>
-                    <div id="info-page" class="info-box">
+                    <c:if test="${loginedUser.lang.size gt 0}">
+                        <div id="info-page" class="info-box">
                         <span class="languageName"><h3><b>Java Script</b></h3></span>
                         <span class="languageDesc">
                 i am veryyyy good programmer i am veryyyy good programmer
@@ -48,22 +49,55 @@
                 i am veryyyy good programmer i am veryyyy good programmer
                 </span>
                     </div>
+                    </c:if>
                 </div>
-                <div class="search-item">
+                    <c:if test="${loginedUser.lang.size eq 0}">
+                        <span id="add-new-item"></span>
+                    </c:if>
+                <div class="search-item show">
                     <div id="change-profile" class="info-box">
                         Change profile
                     </div>
-                    <div id="info-page" class="info-box">
-                        <span class="languageName"><h3><b>Java</b></h3></span>
-                        <span class="languageDesc">
-                  i am veryyyy good programmer i am veryyyy good programmer
-                  i am veryyyy good programmer i am veryyyy good programmer
-                  i am veryyyy good programmer i am veryyyy good programmer
-                  </span>
-                    </div>
+                    <c:if test="${loginedUser.lang.size gt 1}">
+                        <div id="info-page" class="info-box">
+                            <span class="languageName"><h3><b>Scala</b></h3></span>
+                            <span class="languageDesc">
+                i am veryyyy good programmer i am veryyyy good programmer
+                i am veryyyy good programmer i am veryyyy good programmer
+                i am veryyyy good programmer i am veryyyy good programmer
+                </span>
+                        </div>
+                    </c:if>
                 </div>
-                <span id="add-new-item">
+                <c:if test="${loginedUser.lang.size eq 1}">
+                    <span id="add-new-item"></span>
+                </c:if>
+                <c:if test="${loginedUser.lang.size eq 2}">
+                    <span id="add-new-item">
               </span>
+                </c:if>
+                <c:if test="${loginedUser.lang.size gt 2}">
+                        <%! int size = loginedUser.getlang.size; %>
+                    <%! int i; %>
+
+                        <%for ( i = 1; i <= ${loginedUser.lang.size}; i++){ %>
+                        <div class="search-item show">
+                            <div id="info-page" class="info-box right-margin">
+                                <span class="languageName"><h3><b>Scala</b></h3></span>
+                                <span class="languageDesc">
+                                i am veryyyy good programmer i am veryyyy good programmer
+                                i am veryyyy good programmer i am veryyyy good programmer
+                                i am veryyyy good programmer i am veryyyy good programmer
+                                </span>
+                            </div>
+                        </div>
+                        <font color = "green" size = "<%= i %>">
+                            JSP Tutorial
+                        </font><br />
+                        <%}%>
+                    <span id="add-new-item">
+              </span>
+                </c:if>
             </form>
         </div>
     </div>

@@ -5,6 +5,7 @@ import app.entity.enums.KnownAuthority;
 import app.exeptions.AccountPresenceException;
 import app.repository.UserAuthorityRepository;
 import app.repository.UserRepository;
+import org.hibernate.Session;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +66,11 @@ public class UserService {
         return mentors;
     }
 
-    public List<Message> getUserMessages(){
-        List<Message>messages = userRepository.
+    public List<Message> getUserMessages(User user){
+       return  userRepository.findUserById(user.getId()).getMessagesTo();
+    }
+
+    public void updateUser(User user){
+        userRepository.updateUser(user);
     }
 }

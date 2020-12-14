@@ -3,6 +3,7 @@ package app.entity;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -11,26 +12,52 @@ import java.util.Set;
 @Table(name = "messages")
 public class Message {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @EmbeddedId
+    private UserMessageId userMessageId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userFromId")
+    private User userFrom;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userToId")
+    private User userTo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("langId")
+    private ProgrammingLang  programmingLangMessage;
 
     @Column(name = "content")
-    String content;
+    private String content;
+
+    @Column(name = "date")
+    private Instant date = Instant.now();
 
     public Message(){}
 
 
-    @ManyToMany(mappedBy = "messages")
-    @SuppressWarnings("FieldMayBeFinal")
-    private Set<User> users = new HashSet<>();
-
-    public int getId() {
-        return id;
+    public UserMessageId getUserMessageId() {
+        return userMessageId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserMessageId(UserMessageId userMessageId) {
+        this.userMessageId = userMessageId;
+    }
+
+    public User getUserFrom() {
+        return userFrom;
+    }
+
+    public void setUserFrom(User userFrom) {
+        this.userFrom = userFrom;
+    }
+
+    public User getUserTo() {
+        return userTo;
+    }
+
+    public void setUserTo(User userTo) {
+        this.userTo = userTo;
     }
 
     public String getContent() {
@@ -41,12 +68,20 @@ public class Message {
         this.content = content;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Instant getDate() {
+        return date;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setDate(Instant date) {
+        this.date = date;
+    }
+
+    public ProgrammingLang getProgrammingLangMessage() {
+        return programmingLangMessage;
+    }
+
+    public void setProgrammingLangMessage(ProgrammingLang programmingLangMessage) {
+        this.programmingLangMessage = programmingLangMessage;
     }
 
     @Override
@@ -54,20 +89,11 @@ public class Message {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
-        return Objects.equals(content, message.content) && users.equals(message.users);
+        return userFrom.equals(message.userFrom) && userTo.equals(message.userTo) && programmingLangMessage.equals(message.programmingLangMessage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(content, users);
-    }
-
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", users=" + users +
-                '}';
+        return Objects.hash(userFrom, userTo, programmingLangMessage);
     }
 }

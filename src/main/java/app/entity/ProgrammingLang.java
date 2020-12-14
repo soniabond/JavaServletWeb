@@ -3,9 +3,7 @@ package app.entity;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "programming_langs")
@@ -25,6 +23,21 @@ public class ProgrammingLang {
             orphanRemoval = true
     )
     private Set<UserLanguage> users = new HashSet<>();
+
+    @OneToMany(
+            mappedBy = "programmingLangMessage",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Message> messages = new ArrayList<>();
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public int getId() {
         return id;

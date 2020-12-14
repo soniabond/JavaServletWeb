@@ -27,6 +27,8 @@ public class MentorSearchServlet extends HttpServlet {
             throws ServletException, IOException {
 
         //List<User>mentors = DataDAO.findAllMentors();
+
+
         List<Mentor>mentors = userService.getAllMentors();
         request.setAttribute("mentors", mentors);
 

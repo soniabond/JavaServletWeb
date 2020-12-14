@@ -29,6 +29,14 @@ public class ProgrammingLangsRepository {
         return user;
     }
 
+    public void updateLang(ProgrammingLang lang){
+        Session session=HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(lang);
+        session.getTransaction().commit();
+        session.close();
+    }
+
     public ProgrammingLang findLangByName(String name){
         Session session=HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

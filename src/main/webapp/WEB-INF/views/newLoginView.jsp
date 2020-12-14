@@ -192,12 +192,14 @@
 </style>
 <div class="main-body">
     <div id="sign-form" class="my-container">
-        <a href="${pageContext.request.contextPath}/home" class="sign-item menu-button">home</a>
-        <a href="${pageContext.request.contextPath}/myInfo" class="sign-item menu-button">my profile</a>
-        <a href="${pageContext.request.contextPath}/mentorSearch" class="sign-item menu-button">find mentor</a>
-        <a href="${pageContext.request.contextPath}/logout" class="sign-item menu-button">log out</a>
-        <a href="${pageContext.request.contextPath}/login" class="sign-item menu-button" id="one">sign in</a>
-    </div>
+        <c:if test="${empty loginedUser}">
+            <%@ include file ="_menuUnsigned.jsp"%>
+            is empty or null.
+        </c:if>
+        <c:if test="${not empty loginedUser}">
+            <%@ include file ="_menuSigned.jsp"%>
+            is NOT empty or null.
+        </c:if></div>
     <div class="main-content-box">
 
         <div class="container">

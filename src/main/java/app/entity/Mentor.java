@@ -12,6 +12,10 @@ import java.util.Set;
 @DiscriminatorValue("MENT")
 @SuppressWarnings("FieldMayBeFinal")
 public class Mentor extends User {
+
+    @Column(name = "self_description")
+    private String description;
+
     @Column(name = "cooperation_conditions")
         private String cooperation;
 
@@ -20,13 +24,6 @@ public class Mentor extends User {
 
     public Mentor(){}
 
-    public Mentor(int id, String mail, String city, String placeOfWork, String password, String firstName, String lastName, String phoneNumber, Map<KnownAuthority, UserAuthority> authorities, String cooperation, String cooperationPrice, Set<UserLanguage> posts) {
-        super(id, mail, city, placeOfWork, password, firstName, lastName, phoneNumber, authorities);
-        this.cooperation = cooperation;
-        this.cooperationPrice = cooperationPrice;
-        this.langs = posts;
-    }
-
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
@@ -34,7 +31,21 @@ public class Mentor extends User {
     )
     private Set<UserLanguage> langs = new HashSet<>();
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<UserLanguage> getLangs() {
+        return langs;
+    }
+
+    public void setLangs(Set<UserLanguage> langs) {
+        this.langs = langs;
+    }
 
     public String getCooperation() {
         return cooperation;

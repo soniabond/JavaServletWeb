@@ -73,13 +73,35 @@ public abstract class User implements Serializable {
     @MapKey(name = "value")
     private Map<KnownAuthority, UserAuthority> authorities = new EnumMap<>(KnownAuthority.class);
 
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name = "user_messages",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "message_id", referencedColumnName = "id")
+    @OneToMany(
+            mappedBy = "userFrom",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
-    private List<Message> messages = new ArrayList<>();
+    private List<Message> messagesFrom = new ArrayList<>();
 
+    @OneToMany(
+            mappedBy = "userTo",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Message> messagesTo = new ArrayList<>();
+
+    public List<Message> getMessagesFrom() {
+        return messagesFrom;
+    }
+
+    public void setMessagesFrom(List<Message> messagesFrom) {
+        this.messagesFrom = messagesFrom;
+    }
+
+    public List<Message> getMessagesTo() {
+        return messagesTo;
+    }
+
+    public void setMessagesTo(List<Message> messagesTo) {
+        this.messagesTo = messagesTo;
+    }
 
     public User(){}
 
@@ -137,14 +159,6 @@ public abstract class User implements Serializable {
 
     public void setPlaceOfWork(String placeOfWork) {
         this.placeOfWork = placeOfWork;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
     }
 
     public Map<KnownAuthority, UserAuthority> getAuthorities() {

@@ -8,11 +8,11 @@ import java.util.Objects;
 @Embeddable
 public class UserLanguageId implements Serializable {
 
-        @Column(name = "user_id")
-        private int userId;
+    @Column(name = "user_id")
+    private int userId;
 
-        @Column(name = "lang_id")
-        private int langId;
+    @Column(name = "lang_id")
+    private int langId;
 
     public UserLanguageId(int userId, int langId) {
         this.userId = userId;

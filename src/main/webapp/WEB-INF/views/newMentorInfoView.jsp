@@ -19,17 +19,15 @@
 <body>
 <dialog>
     <span id="button-name"></span>
-    O HAI, I’m a dialog. Click on me to dismiss
-
+    You are sendind request for mentor. If mentor wants to teach you you will get his personam contacts
+    in a responce message. Check it in notifaction page.
     <form>
-        <p><strong>Выбери персонажа</strong></p>
-        <p><select name="hero">
-            <option value="s1">Чебурашка</option>
-            <option value="s2" selected>Крокодил Гена</option>
-            <option value="s3">Шапокляк</option>
-            <option value="s3" label="Лариса">Крыса Лариса</option>
+        <p><strong>Choose language</strong></p>
+        <p><select>
         </select>
-            <input type="submit" value="Отправить"></p>
+        <p>write your message</p>
+        <textarea cols=50 rows=6></textarea>
+        <input type="submit" value="Send"></p>
     </form>
 
     <button id="leave-dialog-button">Hide dialog</button>
@@ -37,11 +35,15 @@
 <main>
     <div class="main-body">
         <div class="my-container">
-            <a href="#" class="menu-button">home</a>
-            <a href="#" class="menu-button">my profile</a>
-            <a href="#" class="menu-button">find mentor</a>
-            <a href="#" class="menu-button">about</a>
-            <a href="#" class="menu-button" id="one">sign in</a>
+            <c:if test="${empty loginedUser}">
+                <%@ include file ="_menuUnsigned.jsp"%>
+                is empty or null.
+            </c:if>
+            <c:if test="${not empty loginedUser}">
+                <%@ include file ="_menuSigned.jsp"%>
+                is NOT empty or null.
+            </c:if>
+
         </div>
         <div class="main-content-box">
             <div class="main-content">

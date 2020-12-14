@@ -37,7 +37,14 @@
 <main>
     <div class="main-body">
         <div class="my-container">
-            <jsp:include page="_menu.jsp"></jsp:include>
+            <c:if test="${empty loginedUser}">
+                <%@ include file ="_menuUnsigned.jsp"%>
+                is empty or null.
+            </c:if>
+            <c:if test="${not empty loginedUser}">
+                <%@ include file ="_menuSigned.jsp"%>
+                is NOT empty or null.
+            </c:if>
         </div>
         <div class="main-content-box">
             <div class="filter-menu">
